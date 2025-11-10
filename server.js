@@ -1,46 +1,31 @@
-const express = require("express");
-const cors = require("cors");
-const bodyParser = require("body-parser");
+const express = require('express')
+const cors = require('cors')
 
-const app = express();
-const PORT = process.env.PORT || 5000;
+const app = express()
+const PORT = process.env.PORT || 5000
 
+// Allow requests from your Netlify frontend
+app.use(cors({ origin: 'https://charming-lolly-b9022c.netlify.app' }))
 
-app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+const products = [
+  { id: '1', title: 'Wireless Headphones', brand: 'SoundX', price: 150, image_url: 'https://via.placeholder.com/150', rating: 4.5 },
+  { id: '2', title: 'Smart Watch', brand: 'TimeTech', price: 200, image_url: 'https://via.placeholder.com/150', rating: 4.2 },
+  { id: '3', title: 'Gaming Mouse', brand: 'ClickPro', price: 50, image_url: 'https://via.placeholder.com/150', rating: 4.8 },
+  { id: '4', title: 'Bluetooth Speaker', brand: 'BeatBox', price: 120, image_url: 'https://via.placeholder.com/150', rating: 4.3 },
+]
 
+const primeDeals = [
+  { id: '101', title: '4K LED TV', brand: 'ViewMax', price: 500, image_url: 'https://via.placeholder.com/150', rating: 4.7 },
+  { id: '102', title: 'Laptop', brand: 'CompPro', price: 800, image_url: 'https://via.placeholder.com/150', rating: 4.6 },
+  { id: '103', title: 'Wireless Earbuds', brand: 'SoundX', price: 100, image_url: 'https://via.placeholder.com/150', rating: 4.4 },
+]
 
-const users = [
-  { username: "rahul", password: "rahul@2021" },
-  { username: "naseer", password: "naseer@123" },
-];
+app.get('/products', (req, res) => {
+  res.json({ products })
+})
 
+app.get('/prime-deals', (req, res) => {
+  res.json({ prime_deals: primeDeals })
+})
 
-app.post("/login", (req, res) => {
-  console.log("Received body:", req.body);
-
-  const { username, password } = req.body || {};
-
-  if (!username || !password) {
-    return res.status(400).json({ error_msg: "Username and password required" });
-  }
-
- 
-  const user = users.find(
-    (each) =>
-      each.username.toLowerCase() === username.toLowerCase() &&
-      each.password === password
-  );
-
-  if (user) {
-    return res.json({ jwt_token: "dummy-jwt-token" });
-  } else {
-    return res.status(401).json({ error_msg: "Invalid username or password" });
-  }
-});
-
-
-app.listen(PORT, () => {
-  console.log(`Server running on http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`))
