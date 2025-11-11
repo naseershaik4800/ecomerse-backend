@@ -1,39 +1,32 @@
-const express = require('express');
-const cors = require('cors');
-const db = require('./database');
-
+import express from 'express';
+import cors from 'cors';
+import db from './database.js';
 
 const app = express();
+app.use(cors());
+app.use(express.json());
+
 const PORT = process.env.PORT || 5050;
 
-app.use(cors({ origin: '*' }));
-app.use(express.json());
+
+console.log('Connected to SQLite database.');
+
+
+app.get('/', (req, res) => {
+  res.send('Backend server is running successfully 🚀');
+});
 
 
 app.get('/products', (req, res) => {
-  db.all('SELECT * FROM products', [], (err, rows) => {
-    if (err) {
-      console.error('Error fetching products:', err);
-      res.status(500).json({ error: 'Internal server error' });
-    } else {
-      res.json({ products: rows });
-    }
-  });
+  const products = db.prepare('SELECT * FROM products').all();
+  res.json(products);
 });
 
 
 app.get('/prime-deals', (req, res) => {
-  db.all('SELECT * FROM prime_deals', [], (err, rows) => {
-    if (err) {
-      console.error('Error fetching prime deals:', err);
-      res.status(500).json({ error: 'Internal server error' });
-    } else {
-      res.json({ prime_deals: rows });
-    }
-  });
+  const primeDeals = db.prepare('SELECT * FROM prime_deals').all();
+  res.json(primeDeals);
 });
-
-
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

@@ -1,32 +1,57 @@
-const db = require('./database');
+import db from './database.js';
+
+
+db.prepare('DELETE FROM products').run();
+db.prepare('DELETE FROM prime_deals').run();
+
 
 const products = [
-  ['Wireless Headphones', 'SoundX', 150, 'https://via.placeholder.com/150', 4.5],
-  ['Smart Watch', 'TimeTech', 200, 'https://via.placeholder.com/150', 4.2],
-  ['Gaming Mouse', 'ClickPro', 50, 'https://via.placeholder.com/150', 4.8],
-  ['Bluetooth Speaker', 'BeatBox', 120, 'https://via.placeholder.com/150', 4.3],
+  {
+    title: 'Apple iPhone 15',
+    brand: 'Apple',
+    price: 999.99,
+    imageUrl: 'https://via.placeholder.com/150',
+    rating: 4.8
+  },
+  {
+    title: 'Samsung Galaxy S23',
+    brand: 'Samsung',
+    price: 899.99,
+    imageUrl: 'https://via.placeholder.com/150',
+    rating: 4.6
+  }
 ];
+
 
 const primeDeals = [
-  ['4K LED TV', 'ViewMax', 500, 'https://via.placeholder.com/150', 4.7],
-  ['Laptop', 'CompPro', 800, 'https://via.placeholder.com/150', 4.6],
-  ['Wireless Earbuds', 'SoundX', 100, 'https://via.placeholder.com/150', 4.4],
+  {
+    title: 'OnePlus 12',
+    brand: 'OnePlus',
+    price: 799.99,
+    imageUrl: 'https://via.placeholder.com/150',
+    rating: 4.5
+  },
+  {
+    title: 'Google Pixel 8',
+    brand: 'Google',
+    price: 899.99,
+    imageUrl: 'https://via.placeholder.com/150',
+    rating: 4.7
+  }
 ];
 
-db.serialize(() => {
-  const insertProduct = db.prepare(
-    'INSERT INTO products (title, brand, price, imageUrl, rating) VALUES (?, ?, ?, ?, ?)'
-  );
-  products.forEach(p => insertProduct.run(p));
-  insertProduct.finalize();
 
-  const insertPrime = db.prepare(
-    'INSERT INTO prime_deals (title, brand, price, imageUrl, rating) VALUES (?, ?, ?, ?, ?)'
-  );
-  primeDeals.forEach(p => insertPrime.run(p));
-  insertPrime.finalize();
+const insertProduct = db.prepare(`
+  INSERT INTO products (title, brand, price, imageUrl, rating)
+  VALUES (@title, @brand, @price, @imageUrl, @rating)
+`);
+products.forEach(product => insertProduct.run(product));
 
-  console.log('Sample data inserted');
-});
 
-db.close();
+const insertPrime = db.prepare(`
+  INSERT INTO prime_deals (title, brand, price, imageUrl, rating)
+  VALUES (@title, @brand, @price, @imageUrl, @rating)
+`);
+primeDeals.forEach(deal => insertPrime.run(deal));
+
+console.log(' Sample data inserted successfully.');
