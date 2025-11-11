@@ -6,38 +6,24 @@ db.prepare('DELETE FROM prime_deals').run();
 
 
 const products = [
-  {
-    title: 'Apple iPhone 15',
-    brand: 'Apple',
-    price: 999.99,
-    imageUrl: 'https://via.placeholder.com/150',
-    rating: 4.8
-  },
-  {
-    title: 'Samsung Galaxy S23',
-    brand: 'Samsung',
-    price: 899.99,
-    imageUrl: 'https://via.placeholder.com/150',
-    rating: 4.6
-  }
+  { title: "iPhone 15 Pro", brand: "Apple", price: 1299, imageUrl: "https://via.placeholder.com/150", rating: 4.8 },
+  { title: "Galaxy S24 Ultra", brand: "Samsung", price: 1199, imageUrl: "https://via.placeholder.com/150", rating: 4.7 },
+  { title: "Pixel 9 Pro", brand: "Google", price: 1099, imageUrl: "https://via.placeholder.com/150", rating: 4.6 },
+  { title: "OnePlus 12", brand: "OnePlus", price: 899, imageUrl: "https://via.placeholder.com/150", rating: 4.5 },
+  { title: "Sony Xperia 1 VI", brand: "Sony", price: 999, imageUrl: "https://via.placeholder.com/150", rating: 4.3 },
+  { title: "Nothing Phone 2", brand: "Nothing", price: 799, imageUrl: "https://via.placeholder.com/150", rating: 4.4 },
+  { title: "iPad Pro M4", brand: "Apple", price: 1599, imageUrl: "https://via.placeholder.com/150", rating: 4.9 },
+  { title: "MacBook Air M3", brand: "Apple", price: 1399, imageUrl: "https://via.placeholder.com/150", rating: 4.8 },
+  { title: "Dell XPS 15", brand: "Dell", price: 1899, imageUrl: "https://via.placeholder.com/150", rating: 4.7 },
+  { title: "Asus ROG Strix", brand: "Asus", price: 1999, imageUrl: "https://via.placeholder.com/150", rating: 4.6 }
 ];
 
-
 const primeDeals = [
-  {
-    title: 'OnePlus 12',
-    brand: 'OnePlus',
-    price: 799.99,
-    imageUrl: 'https://via.placeholder.com/150',
-    rating: 4.5
-  },
-  {
-    title: 'Google Pixel 8',
-    brand: 'Google',
-    price: 899.99,
-    imageUrl: 'https://via.placeholder.com/150',
-    rating: 4.7
-  }
+  { title: "Amazon Echo Dot", brand: "Amazon", price: 49, imageUrl: "https://via.placeholder.com/150", rating: 4.4 },
+  { title: "Fire TV Stick 4K", brand: "Amazon", price: 39, imageUrl: "https://via.placeholder.com/150", rating: 4.5 },
+  { title: "Sony WH-1000XM5", brand: "Sony", price: 349, imageUrl: "https://via.placeholder.com/150", rating: 4.9 },
+  { title: "Apple Watch Ultra 2", brand: "Apple", price: 799, imageUrl: "https://via.placeholder.com/150", rating: 4.8 },
+  { title: "Kindle Paperwhite", brand: "Amazon", price: 129, imageUrl: "https://via.placeholder.com/150", rating: 4.7 }
 ];
 
 
